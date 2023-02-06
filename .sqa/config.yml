@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/catalogue:
+      branch: main
+      repo: https://github.com/madgeek-arc/catalogue.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/catalogue git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-pear-earwig.sh
+        container: qc.acc_chewy-yellow-eagle
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/catalogue find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.squirrely-malachite-bird.sh
+        container: qc.doc_gimpy-amaranth-ibis
+      github.com/madgeek-arc/catalogue git:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-lilac-dodo.sh
+        container: qc.doc_squirrely-myrtle-bison
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/catalogue licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-goldenrod-tzu.sh
+        container: qc.lic_wimpy-blue-gopher
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/catalogue checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-seashell-okapi.sh
+        container: qc.sty_snippy-cinnamon-robin
+      github.com/madgeek-arc/catalogue hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.snappy-olivine-fowl.sh
+        container: qc.sty_slaphappy-apricot-chimpanzee
+      github.com/madgeek-arc/catalogue jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-tomato-uakari.sh
+        container: qc.sty_homely-pink-insect
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/catalogue get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.silly-fuchsia-burmese.sh
+        container: qc.ver_ready-cinnabar-cow
+timeout: 5400
